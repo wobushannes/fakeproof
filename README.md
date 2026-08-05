@@ -66,7 +66,6 @@ Can I hire you as a consultant? I offer consulting and research collaboration fo
 
 **Contact:** Serious inquiries only. 
 ProtonMail: `blende_32@protonmail.com`. 
-Threema: `BA46EWMP`. Before contacting me: 
-Provide full name and institution, state your concrete purpose, don't ask for code or access – it will be ignored.
+Threema: `BA46EWMP`. 
 
 **License:** All rights reserved. © 2026 Johannes Wobus – fakeproof. *"We show what's possible – not how it's done."*
