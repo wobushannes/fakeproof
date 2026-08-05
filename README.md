@@ -46,15 +46,6 @@ Why? Because I hate cloud dependency. Everything runs locally on my machine. The
 
 ---
 
-## Installation
-
-import nltk
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
-
----
-
 **Data & Models:** None provided. No raw data, no pretrained models. Why? Privacy, no copyright headaches, and if you want it, run the tools yourself. The `text_corpus.db` and `fakes/` folder are created by the tools. Save your trained model separately.
 
 ---
