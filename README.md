@@ -51,6 +51,7 @@ Why? Because I hate cloud dependency. Everything runs locally on my machine. The
 ---
 
 **FAQ:** 
+
 Can I get access to your data or models? No. Access is restricted. Use the tools to generate your own data and train your own models. 
 Can I use it commercially? No. Commercial use is strictly prohibited. No licenses. No exceptions. 
 Can I get a live demo? No. Run the tools yourself if you want to see them working. 
