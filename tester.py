@@ -5,6 +5,7 @@ from tkinter import ttk, scrolledtext, filedialog, messagebox
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import numpy as np
 from pathlib import Path
+import re
 
 # ====== KONFIGURATION ======
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -202,36 +203,20 @@ class DetectorTesterPro:
             messagebox.showerror("Fehler", str(e))
     
     def _explain_text(self, input_ids, fake_prob):
-        """Zeigt Wort-Erklärung basierend auf Token-Attention"""
+        """Zeigt Wort-Erklärung basierend auf Token-Attention mit korrekter UTF-8 Darstellung"""
         try:
-            tokens = self.tokenizer.convert_ids_to_tokens(input_ids.squeeze().cpu().numpy())
+            # Originaltext aus der Eingabe holen für korrekte Darstellung
+            text = self.text_entry.get("1.0", tk.END).strip()
             
-            # Wörter zusammensetzen
-            words = []
-            current_word = ""
+            # Text in Wörter aufteilen (korrekte Umlaute und Sonderzeichen)
+            words = re.findall(r'\w+|[^\w\s]', text, re.UNICODE)
             
-            for token in tokens:
-                if token in ['[CLS]', '[SEP]', '[PAD]', '[UNK]']:
-                    continue
-                
-                if token.startswith("Ġ"):
-                    if current_word:
-                        words.append(current_word)
-                    current_word = token[1:]
-                elif token.startswith("##"):
-                    current_word += token[2:]
-                else:
-                    if current_word:
-                        words.append(current_word)
-                    current_word = token
+            # Entferne Leerzeichen aus der Liste
+            words = [w for w in words if w.strip()]
             
-            if current_word:
-                words.append(current_word)
-            
-            # Erklärung anzeigen
             self.explain_text.delete("1.0", tk.END)
             
-            # Einfache Markierung basierend auf Wahrscheinlichkeit und Wortlänge
+            # Wörter mit Markierung versehen
             for word in words:
                 # Je höher die Fake-Wahrscheinlichkeit, desto mehr Wörter werden markiert
                 if fake_prob > 0.8 and len(word) > 6:
